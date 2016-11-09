@@ -1,0 +1,21 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "value": "superuser"
+    },
+    "dnsNameForPublicIP": {
+      "value": "gm9backendserver"
+    },
+    "virtualMachineName": {
+      "value": "backend"
+    },
+    "vmCount": {
+      "value": 5
+    },
+    "virtualNetwork": {
+      "value": "backend"
+    }
+  }
+  }
