@@ -1,0 +1,76 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "serverfarms_azuredevtest_name": {
+            "defaultValue": "azuredevtest",
+            "type": "String"
+        },
+        "sites_azuredevtest_name": {
+            "defaultValue": "azuredevtest",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/3878b2b5-86c3-4f21-ae6c-724278126f10/resourceGroups/azuredevtest/providers/Microsoft.Web/serverfarms/azuredevtest'.",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "S1",
+                "tier": "Standard",
+                "size": "S1",
+                "family": "S",
+                "capacity": 1
+            },
+            "kind": "app",
+            "name": "[parameters('serverfarms_azuredevtest_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "South Central US",
+            "properties": {
+                "name": "[parameters('serverfarms_azuredevtest_name')]",
+                "numberOfWorkers": 1
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/3878b2b5-86c3-4f21-ae6c-724278126f10/resourceGroups/azuredevtest/providers/Microsoft.Web/sites/azuredevtest'.",
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[parameters('sites_azuredevtest_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "South Central US",
+            "tags": {
+                "hidden-related:/subscriptions/3878b2b5-86c3-4f21-ae6c-724278126f10/resourcegroups/azuredevtest/providers/Microsoft.Web/serverfarms/azuredevtest": "empty"
+            },
+            "properties": {
+                "name": "[parameters('sites_azuredevtest_name')]",
+                "hostNames": [
+                    "azuredevtest.azurewebsites.net"
+                ],
+                "enabledHostNames": [
+                    "azuredevtest.azurewebsites.net",
+                    "azuredevtest.scm.azurewebsites.net"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_azuredevtest_name'),'.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(parameters('sites_azuredevtest_name'),'.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_azuredevtest_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_azuredevtest_name'))]"
+            ]
+        }
+    ]
+}
